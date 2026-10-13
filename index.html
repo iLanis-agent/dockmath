@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dock math - the deck names the floats, the water names the piles, and the bank names the gangway</title>
+<style>
+  :root { --accent: #c4552a; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Georgia, 'Times New Roman', serif; background: #f8f5f3; color: #2b2624; line-height: 1.55; }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 20px 64px; }
+  h1 { font-size: 2.4rem; margin: 0 0 12px; color: var(--accent); }
+  h2 { font-size: 1.25rem; margin: 40px 0 12px; }
+  p { margin: 0 0 14px; }
+  a { color: var(--accent); }
+  .cta { display: inline-block; margin: 10px 0 8px; padding: 12px 22px; background: var(--accent); color: #fff; text-decoration: none; border-radius: 6px; font-size: 1.05rem; }
+  ul { padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  .norms { background: #fff; border: 1px solid #e3d9d3; border-left: 4px solid var(--accent); border-radius: 6px; padding: 14px 18px; margin-top: 12px; }
+  footer { max-width: 720px; margin: 0 auto; padding: 0 20px 40px; font-size: 0.85rem; color: #a89d97; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Dock math</h1>
+  <p>A dock goes wrong at the waterline: floats that ride one guest low, piles cut before the freeboard was decided, or a gangway that turns into a ladder at low water. Dock math turns the deck and the crew into the drums that hold them up, turns the water depth into the pile length, and turns the bank drop into the gangway run. Exact arithmetic, every borrowed number labeled.</p>
+  <a class="cta" href="app.html">Open the calculators</a>
+  <h2>The three tools</h2>
+  <ul>
+    <li><strong>Float plan</strong> - the deck at labeled weights becomes the lift and the drums.</li>
+    <li><strong>Pile plan</strong> - the water plus labeled freeboard and embedment becomes the pile length.</li>
+    <li><strong>Gangway plan</strong> - the bank drop at the labeled slope becomes the gangway length.</li>
+  </ul>
+  <h2>Labeled norms</h2>
+  <div class="norms">
+    Labeled norms: 30 kg per m2 of decking, 90 kg per person, 180 kg of lift per float drum, 0.6 m freeboard, 1.0 m embedment, and a 1:3 gangway slope - all illustrative defaults you can change by measuring. A real dock follows the float maker's tables, the local waterway rules and the code. This is layout arithmetic, not a buoyancy certificate or a safety rating: let the maker's numbers govern.
+  </div>
+</main>
+<footer>Built by the app factory. <a href="https://github.com/iLanis-agent/dockmath">Source on GitHub</a></footer>
+</body>
+</html>
