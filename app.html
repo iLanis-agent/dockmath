@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dock math - calculators</title>
+<style>
+  :root { --accent: #c4552a; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Georgia, 'Times New Roman', serif; background: #f8f5f3; color: #2b2624; line-height: 1.55; }
+  main { max-width: 1100px; margin: 0 auto; padding: 40px 20px 64px; }
+  h1 { font-size: 2rem; margin: 0 0 8px; color: var(--accent); }
+  .lede { margin: 0 0 14px; max-width: 640px; }
+  .note { background: #fff; border: 1px solid #e3d9d3; border-left: 4px solid var(--accent); border-radius: 6px; padding: 12px 16px; font-size: 0.9rem; margin: 0 0 28px; max-width: 720px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+  section { background: #fff; border: 1px solid #e3d9d3; border-radius: 8px; padding: 20px 22px; }
+  h2 { font-size: 1.15rem; margin: 0 0 6px; }
+  .hint { font-size: 0.9rem; color: #82736b; margin: 0 0 14px; }
+  label { display: block; font-size: 0.9rem; margin: 10px 0 3px; }
+  input { width: 100%; padding: 8px 10px; font-size: 1rem; border: 1px solid #c6b8b0; border-radius: 5px; font-family: inherit; }
+  button { margin-top: 16px; width: 100%; padding: 11px; background: var(--accent); color: #fff; border: 0; border-radius: 6px; font-size: 1rem; cursor: pointer; font-family: inherit; }
+  button:hover { filter: brightness(1.08); }
+  .out { margin-top: 14px; font-size: 1rem; min-height: 1.4em; }
+  .out.err { color: #a32222; }
+  footer { max-width: 1100px; margin: 0 auto; padding: 0 20px 40px; font-size: 0.85rem; color: #a89d97; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Dock math</h1>
+  <p class="lede">The deck names the floats, the water names the piles, and the bank names the gangway. Exact arithmetic, every borrowed number labeled.</p>
+  <div class="note">Illustrative layout arithmetic only. Every weight, lift and slope is a labeled default; a real dock follows the float maker's tables, the local waterway rules and the code.</div>
+  <div class="grid">
+    <section>
+      <h2>Float plan</h2>
+      <p class="hint">The deck names the floats.</p>
+      <label for="f-w">Deck width (m)</label>
+      <input id="f-w" type="number" value="2" min="0" step="0.5">
+      <label for="f-l">Deck length (m)</label>
+      <input id="f-l" type="number" value="4" min="0" step="0.5">
+      <label for="f-p">People aboard (count)</label>
+      <input id="f-p" type="number" value="4" min="0" step="1">
+      <button id="f-go">Float the deck</button>
+      <div class="out" id="f-out"></div>
+    </section>
+    <section>
+      <h2>Pile plan</h2>
+      <p class="hint">The water names the piles.</p>
+      <label for="p-d">Water depth (m)</label>
+      <input id="p-d" type="number" value="1.2" min="0" step="0.1">
+      <button id="p-go">Cut the piles</button>
+      <div class="out" id="p-out"></div>
+    </section>
+    <section>
+      <h2>Gangway plan</h2>
+      <p class="hint">The bank names the gangway.</p>
+      <label for="g-d">Bank drop (m)</label>
+      <input id="g-d" type="number" value="0.5" min="0" step="0.1">
+      <button id="g-go">Lay the gangway</button>
+      <div class="out" id="g-out"></div>
+    </section>
+  </div>
+</main>
+<footer>Built by the app factory. <a href="index.html">About</a> &middot; <a href="https://github.com/iLanis-agent/dockmath">Source</a></footer>
+<script src="engine.js"></script>
+<script>
+function num(id){ return parseFloat(document.getElementById(id).value); }
+function show(id, r, render){
+  var el = document.getElementById(id);
+  if (r.error) { el.textContent = r.error; el.classList.add('err'); }
+  else { el.textContent = render(r); el.classList.remove('err'); }
+}
+document.getElementById('f-go').addEventListener('click', function(){
+  var a=[num('f-w'),num('f-l'),num('f-p')];
+  show('f-out', DockMath.floatPlan.apply(null,a), function(r){ return DockMath.renderFloat.apply(null,[r].concat(a)); });
+});
+document.getElementById('p-go').addEventListener('click', function(){
+  var a=[num('p-d')];
+  show('p-out', DockMath.pilePlan.apply(null,a), function(r){ return DockMath.renderPile.apply(null,[r].concat(a)); });
+});
+document.getElementById('g-go').addEventListener('click', function(){
+  var a=[num('g-d')];
+  show('g-out', DockMath.gangPlan.apply(null,a), function(r){ return DockMath.renderGang.apply(null,[r].concat(a)); });
+});
+</script>
+</body>
+</html>
